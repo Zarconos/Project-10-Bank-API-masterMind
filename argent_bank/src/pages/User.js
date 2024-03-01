@@ -1,37 +1,25 @@
 // User.js
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signOut, updateUser } from '../redux/authSlice';
 import Footer from '../components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../img/argentBankLogo.png";
+import { selectStore } from '../redux/selector';
+import { userProfile } from '../api/api'; // Assurez-vous d'importer userProfile depuis les actions Redux
 
-const User = () => {
+
+function User() {
+  const user = useSelector(selectStore);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user);
-  const navigate = useNavigate();
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-  const [newFirstName, setNewFirstName] = useState('');
-  const [newLastName, setNewLastName] = useState('');
-  const [editMode, setEditMode] = useState(false);
+  useEffect(() => {
+    dispatch(userProfile(user.authToken));
+  }, [dispatch, user.authToken]);
 
-  const handleUpdateUser = () => {
-    // Vérifiez que les champs ne sont pas vides avant de mettre à jour
-    if (newFirstName.trim() !== '' && newLastName.trim() !== '') {
-      // Dispatch l'action pour mettre à jour le nom de l'utilisateur
-      dispatch(updateUser({ firstName: newFirstName, lastName: newLastName }));
-      // Quitte le mode édition après la mise à jour
-      setEditMode(false);
-    }
-  };
+  console.log('User data from Redux store:', user); // Vérifiez les données de l'utilisateur dans le Redux store
 
-  const handleSignOut = () => {
-    // Dispatch l'action de déconnexion
-    dispatch(signOut());
-    // Navigue vers la page d'accueil après la déconnexion
-    navigate('/');
-  };
+  const { firstName, lastName } = user.user;
+
 
   return (
     <div>
@@ -45,14 +33,8 @@ const User = () => {
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
         <div>
-          {isAuthenticated ? (
-            <Link to="/user" className="main-nav-item">
-              <i className="fa fa-user-circle"></i>
-              
-            </Link>
-          ) : null}
-
-          <button className="main-nav-item" onClick={handleSignOut}>
+          
+          <button className="main-nav-item" >
             <i className="fa fa-sign-out"></i>
             Sign Out
           </button>
@@ -60,33 +42,14 @@ const User = () => {
       </nav>
       <main className="main bg-dark">
         <div className="header">
-          {editMode ? (
-            <div>
-              <input
-                type="text"
-                placeholder="Enter new first name"
-                value="{newFirstName}"
-                
-              />
-              <input
-                type="text"
-                placeholder="Enter new last name"
-                value="{newLastName}"
-                
-              />
-              <button className="edit-button" >
-                Update User
-              </button>
-              <button className="cancel-button" >
-                Cancel
-              </button>
-            </div>
-          ) : (
+      
             <h1>
               Welcome back<br />
+              {`${firstName} yo ${lastName}`}
+
               !
             </h1>
-          )}
+          
         </div>
 
         <h2 className="sr-only">Accounts</h2>

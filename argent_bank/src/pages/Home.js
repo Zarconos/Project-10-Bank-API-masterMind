@@ -9,30 +9,21 @@ import chat from "../img/icon-chat.png";
 import money from "../img/icon-money.png";
 import security from "../img/icon-security.png";
 
-import { useSelector, useDispatch } from 'react-redux';
-import { signIn, updateUser } from '../redux/authSlice';
-import { users } from '../data/data'; // Import the users array
+import { useSelector } from 'react-redux';
+
+
 
 const Home = () => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const user = useSelector(state => state.auth.user);
-  
-  const dispatch = useDispatch();
 
-  const handleSignIn = () => {
-    // Dispatch the signIn action with user data
-    dispatch(signIn(users[0])); // Sign in with the first user from data.js
-  };
 
-  const handleUpdateUser = () => {
-    // Dispatch the updateUser action to modify user information
-    dispatch(updateUser({ firstName: 'Updated Tony' }));
-  };
+
 
   const userName = isAuthenticated ? user.firstName : "";
   return (
     <div>
-       <Header isAuthenticated={isAuthenticated} userName={userName} />
+       <Header  />
       <main>
         <div className="hero">
           <section className="hero-content">
@@ -72,16 +63,6 @@ const Home = () => {
         {/* Ajoute une condition pour le lien "Sign Up" en fonction de l'état d'authentification */}
         
         <section className="cta">
-          <h2 className="sr-only">Call to Action</h2>
-          <p>Join our exclusive membership to receive the latest news and trends.</p>
-          {isAuthenticated ? (
-            <>
-              <Link to="/user" className="cta-button">{`Go to ${userName}'s Profile`}</Link>
-              <button className="cta-button" onClick={handleUpdateUser}>Update User</button>
-            </>
-          ) : (
-            <Link to="/signup" className="cta-button" onClick={handleSignIn}>Sign Up Now</Link>
-          )}
         </section>
         
       </main>
