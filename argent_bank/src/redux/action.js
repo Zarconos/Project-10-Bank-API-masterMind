@@ -2,7 +2,7 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const userLogin = createAsyncThunk(
     'store/userLogin',
-    async ({ email, password }) => {
+    async ({ email, password }, { rejectWithValue }) => {
       try {
         const response = await fetch(`http://localhost:3001/api/v1/user/login`, {
           method: 'POST',
@@ -11,18 +11,23 @@ export const userLogin = createAsyncThunk(
           },
           body: JSON.stringify({ email, password })
         });
-  
-        if (!response.ok) {
-          throw new Error('Error in user login');
+
+
+        if (response.ok) {
+          const data = await response.json();
+          return data;
+        } else {
+
+          const errorMessage = await response.text();
+          return rejectWithValue(errorMessage);
         }
-  
-        const data = await response.json();
-        return data;
       } catch (error) {
         throw error;
       }
     }
-  );
+);
+
+
 
 export const userProfile = createAsyncThunk('store/userProfile', async (token) => {
     try {

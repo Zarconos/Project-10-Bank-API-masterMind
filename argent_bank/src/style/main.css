@@ -15,11 +15,17 @@ body {
 
 .main {
   flex: 1;
+  display: flex;
+}
+
+.main-content {
+width: 100%;
 }
 
 .bg-dark {
   background-color: #12002b;
 }
+
 
 .sr-only {
   border: 0 !important;
@@ -51,9 +57,22 @@ body {
   color: #42b983;
 }
 
+.main-nav-top-right{
+  display: flex;
+}
+
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+    color: #2c3e50;
 }
 
 .main-nav-item:hover {
@@ -165,21 +184,59 @@ body {
   color: #fff;
 }
 
+.edit-button {
+  display: block;
+  max-width: 200px;
+  padding: 8px;
+  font-weight: bold;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+
+.user-name-buttons{
+  display: flex;
+}
+
+.edit-Subbutton{
+  display: block;
+  min-width: 200px;
+  padding: 8px;
+  font-weight: bold;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  margin-left: 20px;
+}
+
+.user-name{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
   width: 300px;
   margin: 0 auto;
   margin-top: 3rem;
+  margin-bottom: 20%;
   padding: 2rem;
 }
 
 .sign-in-icon {
-  font-size: 5rem;
+  display: inline-block;
+  font: normal normal normal 14px / 1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
 }
 
 .input-remember {
   display: flex;
+  margin-top: 1rem;
 }
 
 .input-remember label {
@@ -191,6 +248,19 @@ body {
   flex-direction: column;
   text-align: left;
   margin-bottom: 1rem;
+}
+
+.input-wrapper-user{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.input-wrapper-user input {
+  padding: 5px;
+  font-size: 1.2rem;
+  margin-left: 20px;
 }
 
 .input-wrapper label {
@@ -227,6 +297,22 @@ body {
   box-sizing: border-box;
   text-align: left;
   margin-bottom: 2rem;
+}
+
+.account-bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  background-color: #fff;
+  width: 80%;
+  margin: 0 auto;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 8rem;
+  flex-direction: row;
 }
 
 .account-amount {
@@ -276,6 +362,13 @@ body {
   color: #fff;
 }
 
+.error-message{
+  margin-top: 10px;
+  background-color: #F8DEE2;
+  color: black;
+  max-width: 270px;
+}
+
 @media (min-width: 720px) {
   .account {
     flex-direction: row;
@@ -288,4 +381,45 @@ body {
   .transaction-button {
     width: 200px;
   }
+
+}
+
+@media (max-width: 720px) {
+
+  .account-bottom {
+    flex-direction: column!important;
+}
+
+.input-wrapper-user {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+
+.input-wrapper-user input {
+  padding: 5px;
+  font-size: 1.2rem;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.edit-Subbutton {
+  display: block;
+  padding: 8px;
+  width: 100%;
+  min-width: 0%;
+  font-weight: bold;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  margin-left: 20px;
+}
+
+.user-name-buttons {
+  display: flex;
+  width: 80%;
+}
+
 }

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLogin, userProfile, userUpdateProfile } from '../api/api';
+import { userLogin, userProfile, userUpdateProfile } from '../redux/action';
 
 const initialState = {
     isLoggedIn: false,
@@ -16,10 +16,7 @@ const storeSlice = createSlice({
     name: "store",
     initialState: initialState,
     reducers: {
-        toggleEdit: (state) => {
-            state.user.isEditing = !state.user.isEditing;
-        },
-        clearUserData: (state) => {
+        logout: (state) => {
             state.isLoggedIn = false;
             state.user.firstName = null;
             state.user.lastName = null;
@@ -52,6 +49,6 @@ const storeSlice = createSlice({
     },
 });
 
-export const { toggleEdit, clearUserData } = storeSlice.actions;
+export const { logout } = storeSlice.actions;
 
 export default storeSlice.reducer;

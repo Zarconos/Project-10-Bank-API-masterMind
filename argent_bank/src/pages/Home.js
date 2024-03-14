@@ -1,7 +1,6 @@
 // Home.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import "../style/main.css";
@@ -9,21 +8,13 @@ import chat from "../img/icon-chat.png";
 import money from "../img/icon-money.png";
 import security from "../img/icon-security.png";
 
-import { useSelector } from 'react-redux';
+function Home() {
+  // Détermine si l'utilisateur est connecté à partir du Redux store ou du contexte d'authentification
+  const isLoggedIn = true;
 
-
-
-const Home = () => {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const user = useSelector(state => state.auth.user);
-
-
-
-
-  const userName = isAuthenticated ? user.firstName : "";
   return (
     <div>
-       <Header  />
+       <Header />
       <main>
         <div className="hero">
           <section className="hero-content">
@@ -60,11 +51,11 @@ const Home = () => {
             </p>
           </div>
         </section>
-        {/* Ajoute une condition pour le lien "Sign Up" en fonction de l'état d'authentification */}
-        
-        <section className="cta">
-        </section>
-        
+        {isLoggedIn && (
+          <section className="cta">
+            <Link to="/user" className="button"></Link>
+          </section>
+        )}
       </main>
       <Footer />
     </div>
@@ -72,4 +63,3 @@ const Home = () => {
 };
 
 export default Home;
-
