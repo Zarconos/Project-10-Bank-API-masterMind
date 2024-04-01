@@ -15,6 +15,7 @@ export const userLogin = createAsyncThunk(
 
         if (response.ok) {
           const data = await response.json();
+          localStorage.setItem('authToken', data.token);
           return data;
         } else {
 
@@ -26,8 +27,6 @@ export const userLogin = createAsyncThunk(
       }
     }
 );
-
-
 
 export const userProfile = createAsyncThunk('store/userProfile', async (token) => {
     try {

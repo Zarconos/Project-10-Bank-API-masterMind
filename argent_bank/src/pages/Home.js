@@ -1,6 +1,5 @@
 // Home.js
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import "../style/main.css";
@@ -9,8 +8,6 @@ import money from "../img/icon-money.png";
 import security from "../img/icon-security.png";
 
 function Home() {
-  // Détermine si l'utilisateur est connecté à partir du Redux store ou du contexte d'authentification
-  const isLoggedIn = true;
 
   return (
     <div>
@@ -51,11 +48,6 @@ function Home() {
             </p>
           </div>
         </section>
-        {isLoggedIn && (
-          <section className="cta">
-            <Link to="/user" className="button"></Link>
-          </section>
-        )}
       </main>
       <Footer />
     </div>
